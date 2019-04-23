@@ -14,7 +14,7 @@ public class MLController : MLFSM
     public GameObject projectile;
 
     public float damage;
-    
+
     float elapsedTime;
     float shootRate;
 
@@ -95,7 +95,7 @@ public class MLController : MLFSM
 
     public void ShootProjectile()
     {
-        if(elapsedTime >= shootRate)
+        if (elapsedTime >= shootRate)
         {
             anim.SetBool("isAttacking", true);
             Instantiate(projectile, spawnPoint.position, Quaternion.identity);
@@ -106,7 +106,7 @@ public class MLController : MLFSM
 
     void OnCollisionEnter(Collision collision)
     {
-        
+
         if (collision.gameObject.tag == "Bullet")
         {
             hp -= 25;
@@ -117,11 +117,29 @@ public class MLController : MLFSM
                 Debug.Log("Minion Leader is dead");
                 SetTransition(MLTransition.NoHP);
                 elapsedTime = 0f;
-                if(elapsedTime >= 3f)
+                if (elapsedTime >= 3f)
                 {
                     Destroy(gameObject);
                 }
             }
         }
     }
+        /*
+    public void Damage(float amount)
+    {
+        hp -= amount;
+        if (hp <= 0f)
+        {
+            anim.SetBool("isDead", true);
+            Debug.Log("Minion Leader is dead");
+            SetTransition(MLTransition.NoHP);
+            elapsedTime = 0f;
+            if (elapsedTime >= 3f)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }*/
+    
 }
+
