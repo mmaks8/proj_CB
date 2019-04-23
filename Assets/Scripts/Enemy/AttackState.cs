@@ -31,7 +31,7 @@ public class AttackState : FSMStates
     public override void Act(Transform player, Transform npc, Animator anim, NavMeshAgent nav, float dmg)
     {
         
-        anim.SetBool("Telekinesis Swing Left", true);
+        anim.SetBool("isAttacking", true);
 
         Quaternion targetRotation = Quaternion.LookRotation(player.position - npc.position);
         npc.rotation = Quaternion.Slerp(npc.rotation, targetRotation, Time.deltaTime * currentRotSpeed);
@@ -40,7 +40,7 @@ public class AttackState : FSMStates
 
         if (dist >= 2f)
         {
-            anim.SetBool("Telekinesis Swing Left", false);
+            anim.SetBool("isAttacking", false);
         }
         
 

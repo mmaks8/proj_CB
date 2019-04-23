@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,7 +19,14 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb.AddForce(transform.forward * speed * Time.deltaTime);
-            //transform.position += transform.up * Time.deltaTime * speed;
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == "enemy")
+        {
+            Destroy(gameObject);
+        }
     }
 }

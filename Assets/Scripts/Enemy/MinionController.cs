@@ -12,8 +12,14 @@ public class MinionController : FSMTwo
 
     public float damage;
 
+    float hp;
+
+    float elapsedTime;
+
     protected override void Initialize()
     {
+        hp = 100f;
+        elapsedTime = 0f;
         damage = 1f;
 
         anim = GetComponent<Animator>();
@@ -62,18 +68,45 @@ public class MinionController : FSMTwo
 
         PatrolState patrol = new PatrolState(wayPoints);
         patrol.AddTransition(Transition.FoundPlayer, FSMStateID.Chasing);
+        patrol.AddTransition(Transition.NoHP, FSMStateID.Dead);
 
         ChaseState chase = new ChaseState(wayPoints);
         chase.AddTransition(Transition.LostPlayer, FSMStateID.Patrolling);
         chase.AddTransition(Transition.ReachedPlayer, FSMStateID.Attacking);
+        chase.AddTransition(Transition.NoHP, FSMStateID.Dead);
 
         AttackState attack = new AttackState(wayPoints);
         attack.AddTransition(Transition.FoundPlayer, FSMStateID.Chasing);
+        attack.AddTransition(Transition.NoHP, FSMStateID.Dead);
 
+        DeadState dead = new DeadState();
+        dead.AddTransition(Transition.NoHP, FSMStateID.Dead);
 
         AddFSMState(patrol);
         AddFSMState(chase);
         AddFSMState(attack);
+        AddFSMState(dead);
 
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+
+        if (collision.gameObject.tag == "Bullet")
+        {
+            hp -= 50;
+
+            if (hp <= 0)
+            {
+                anim.SetBool("isDead", true);
+                Debug.Log("Minion  is dead");
+                SetTransition(Transition.NoHP);
+                elapsedTime = 0f;
+                if (elapsedTime >= 3f)
+                {
+                    Destroy(gameObject);
+                }
+            }
+        }
     }
 }

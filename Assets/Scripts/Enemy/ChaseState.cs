@@ -42,7 +42,7 @@ public class ChaseState : FSMStates
 
     public override void Act(Transform player, Transform npc, Animator anim, NavMeshAgent nav, float dmg)
     {
-        anim.SetBool("Move Forward Fast", true);
+        anim.SetBool("isChasing", true);
 
         destPos = player.position;
 

@@ -29,8 +29,7 @@ public class PatrolState : FSMStates
     public override void Act(Transform player, Transform npc, Animator anim, NavMeshAgent nav, float dmg)
     {
         nav.speed = 2f;
-
-        //anim.SetBool("Move Forward Slow", true);
+        anim.SetBool("isChasing", false);
 
         //finds another waypoint if one is already reached
 

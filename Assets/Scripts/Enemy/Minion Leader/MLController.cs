@@ -25,7 +25,7 @@ public class MLController : MLFSM
         hp = 100f;
         damage = 5f;
         elapsedTime = 0.0f;
-        shootRate = 1f;
+        shootRate = 3f;
 
         anim = GetComponent<Animator>();
         anim.speed = 0.4f;
@@ -90,13 +90,14 @@ public class MLController : MLFSM
         AddMLState(patrol);
         AddMLState(chase);
         AddMLState(attack);
-
+        AddMLState(dead);
     }
 
     public void ShootProjectile()
     {
         if(elapsedTime >= shootRate)
         {
+            anim.SetBool("isAttacking", true);
             Instantiate(projectile, spawnPoint.position, Quaternion.identity);
 
             elapsedTime = 0.0f;

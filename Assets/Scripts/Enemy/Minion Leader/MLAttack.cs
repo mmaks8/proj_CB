@@ -38,7 +38,7 @@ public class MLAttack : MLStatesID
             npc.GetComponent<MLController>().ShootProjectile();
             nav.stoppingDistance = 7f;
             anim.speed = 1f;
-            anim.SetBool("isAttacking", true);
+            
             // damage player
         }
 

@@ -8,7 +8,8 @@ public enum Transition
     None = 0,
     FoundPlayer,
     ReachedPlayer,
-    LostPlayer
+    LostPlayer,
+    NoHP
 }
 
 
@@ -17,7 +18,8 @@ public enum FSMStateID
     None = 0,
     Patrolling,
     Chasing,
-    Attacking
+    Attacking,
+    Dead
 }
 
 public class FSMTwo : FSM

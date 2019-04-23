@@ -57,11 +57,11 @@ public class Player_Controller : MonoBehaviour
                 anim.SetFloat("WalkSpeed", 0.5f);
                 direction = new Vector3(0, 0, 0);
             }
-           /* else if (Input.GetKey(KeyCode.Space) && Time.time >= elapsedTime)
+            if (Input.GetKey(KeyCode.Space) && Time.time >= elapsedTime)
             {
                 elapsedTime = Time.time + 1f / fireRate;
                 Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
-            }*/
+            }
         }
 
 
