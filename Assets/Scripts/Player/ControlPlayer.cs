@@ -16,47 +16,63 @@ public class ControlPlayer : MonoBehaviour
 
     float elapsedTime;
 
-    //public GameObject bullet;
-    //public Transform spawnPoint;
-
-    public GunController gun;
+    public GameObject bullet;
+    public Transform spawnPoint;
 
     float range = 100f;
 
+    float movementSpeed;
+
+    public float hp;
 
     float fireRate;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
-
+        hp = 100f;
+        Debug.Log("Player hp: " + hp);
         fireRate = 20f;
         elapsedTime = 0f;
         anim = GetComponent<Animator>();
         mainCamera = FindObjectOfType<Camera>();
         rb = GetComponent<Rigidbody>();
         speed = 5f;
+        movementSpeed = 5f;
     }
 
     // Update is called once per frame
     void Update()
     {
         anim.SetBool("GunAim", true);
-
-        
-
         /*if (Input.GetKey(KeyCode.Space) && Time.time >= elapsedTime)
         {
             elapsedTime = Time.time + 1f / fireRate;
             //Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
         }*/
-
-        inMove = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
-        moveVelocity = inMove * speed;
-
-
-
-
+        if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))
+        {
+            anim.SetFloat("WalkSpeed", 0.5f);
+            inMove = new Vector3(0f, 0f, Input.GetAxisRaw("Vertical"));
+            moveVelocity = inMove * speed;
+        }
+        if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
+        {
+            anim.SetFloat("WalkSpeed", 0.5f);
+            inMove = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
+            moveVelocity = inMove * speed;
+        }
+        if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
+        {
+            anim.SetFloat("WalkSpeed", 0f);
+            moveVelocity = Vector3.zero;
+        }
+        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S))
+        {
+            anim.SetFloat("WalkSpeed", 0f);
+            moveVelocity = Vector3.zero;
+        }
 
         Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
         Plane ground = new Plane(Vector3.up, Vector3.zero);
@@ -75,21 +91,39 @@ public class ControlPlayer : MonoBehaviour
 
         if(Input.GetMouseButtonDown(0))
         {
-            /*RaycastHit hit;
-            if (Physics.Raycast(cameraRay.origin, cameraRay.direction, out hit, range))
-            {
-                Debug.Log(hit.transform.name);
-            }*/
-            gun.isFiring = true;
+            Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
         }
-        if(Input.GetMouseButtonUp(0))
-        {
-            gun.isFiring = false;
-        }
+
     }
+
 
     void FixedUpdate()
     {
         rb.velocity = moveVelocity;
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+
+        if (collision.gameObject.tag == "Projectile")
+        {
+            hp -= 25;
+            Debug.Log("Player hp: " + hp);
+            if (hp <= 0)
+            {
+                Debug.Log("Player is dead.");
+            }
+        }
+        if(collision.gameObject.tag == "MinionSlap")
+        {
+            hp -= 10;
+            Debug.Log("Player hp: " + hp);
+            if (hp <= 0)
+            {
+                Debug.Log("Player is dead.");
+            }
+        }
+
+
     }
 }

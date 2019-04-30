@@ -7,12 +7,13 @@ public class Bullet : MonoBehaviour
 {
     public float speed;
     Rigidbody rb;
+    public GameObject impactEffect;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        speed = 5f;
+        speed = 20f;
         Destroy(gameObject, 2f);
     }
 
@@ -24,8 +25,14 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "enemy")
+        if(collision.gameObject.tag == "Untagged")
         {
+            Instantiate(impactEffect, transform.position, transform.rotation);
+            Destroy(gameObject);
+        }
+        if (collision.gameObject.tag == "enemy")
+        {
+            Instantiate(impactEffect, transform.position, transform.rotation);
             Destroy(gameObject);
         }
     }

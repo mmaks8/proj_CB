@@ -8,6 +8,9 @@ TagManager:
   - GuardPoint
   - enemy
   - Bullet
+  - Projectile
+  - MinionSlap
+  - terrain
   layers:
   - Default
   - TransparentFX

@@ -94,6 +94,7 @@ public class MinionController : FSMTwo
 
         if (collision.gameObject.tag == "Bullet")
         {
+            anim.SetTrigger("isHit");
             hp -= 50;
 
             if (hp <= 0)

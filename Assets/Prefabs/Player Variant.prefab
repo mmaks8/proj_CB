@@ -30,24 +30,6 @@ Transform:
   m_Father: {fileID: 5349246541128953875}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!143 &836148138
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5347528944167664333}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.83, z: 0}
 --- !u!65 &836148139
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -61,21 +43,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.63, y: 1.89, z: 1.33}
   m_Center: {x: 0, y: 0.93, z: 0}
---- !u!114 &836148137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5347528944167664333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91fb169022ddf52428df4427866f5b53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementSpeed: 0
-  bullet: {fileID: 7307157574559963893, guid: 06342c836353e564cb51168eb51af2e7, type: 3}
-  spawnPoint: {fileID: 1102183126}
 --- !u!1001 &5346817283274207215
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -85,7 +52,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1557748521227554, guid: f3b85cf306cb6b34791fb70b8aa42b94, type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Player Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1557748521227554, guid: f3b85cf306cb6b34791fb70b8aa42b94, type: 3}
       propertyPath: m_TagString

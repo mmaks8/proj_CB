@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    public GameObject impactEffect;
     public Rigidbody rigidbody;
     public float speed = 2f;
     public GameObject target;
@@ -22,14 +23,21 @@ public class Projectile : MonoBehaviour
         
         transform.LookAt(targetPos);
         transform.position += transform.forward * Time.deltaTime * speed;
-        
+
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.name == "Player")
+        if(collision.gameObject.tag == "Player")
         {
+            Instantiate(impactEffect, transform.position, transform.rotation);
             Destroy(gameObject);
         }
+        if (collision.gameObject.tag == "Untagged")
+        {
+            Instantiate(impactEffect, transform.position, transform.rotation);
+            Destroy(gameObject);
+        }
+
     }
 }

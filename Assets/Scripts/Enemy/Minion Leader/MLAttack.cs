@@ -28,16 +28,17 @@ public class MLAttack : MLStatesID
 
     public override void Act(Transform player, Transform npc, Animator anim, NavMeshAgent nav, float dmg)
     {
+        
         Quaternion targetRotation = Quaternion.LookRotation(player.position - npc.position);
         npc.rotation = Quaternion.Slerp(npc.rotation, targetRotation, Time.deltaTime * currentRotSpeed);
         float dist = Vector3.Distance(npc.position, player.position);
 
         if(dist <= 8f)
         {
+            anim.speed = 1f;
             npc.rotation = Quaternion.Slerp(npc.rotation, targetRotation, Time.deltaTime * currentRotSpeed);
             npc.GetComponent<MLController>().ShootProjectile();
             nav.stoppingDistance = 7f;
-            anim.speed = 1f;
             
             // damage player
         }

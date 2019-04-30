@@ -82,9 +82,10 @@ GameObject:
   - component: {fileID: 19900000}
   - component: {fileID: 7185448966850780502}
   - component: {fileID: 5894121065405757619}
+  - component: {fileID: 5661089566035848856}
   m_Layer: 0
   m_Name: Enemy_projectile
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4787,8 +4788,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d5aad9b2e9c2d49a6ad8310ce2ff82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  impactEffect: {fileID: 8614654973077890625, guid: 4422f83ce47ae264da40702cd3d22935,
+    type: 3}
   rigidbody: {fileID: 0}
   speed: 20
+  target: {fileID: 0}
 --- !u!54 &5894121065405757619
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4805,6 +4809,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &5661089566035848856
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100002}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7, y: 1, z: 1.03}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &100004
 GameObject:
   m_ObjectHideFlags: 0

@@ -95,12 +95,14 @@ public class MLController : MLFSM
 
     public void ShootProjectile()
     {
+        anim.SetBool("isAttacking", false);
         if (elapsedTime >= shootRate)
         {
             anim.SetBool("isAttacking", true);
             Instantiate(projectile, spawnPoint.position, Quaternion.identity);
 
             elapsedTime = 0.0f;
+            
         }
     }
 
@@ -109,6 +111,7 @@ public class MLController : MLFSM
 
         if (collision.gameObject.tag == "Bullet")
         {
+            anim.SetBool("isHit", true);
             hp -= 25;
 
             if (hp <= 0)
@@ -123,23 +126,6 @@ public class MLController : MLFSM
                 }
             }
         }
-    }
-        /*
-    public void Damage(float amount)
-    {
-        hp -= amount;
-        if (hp <= 0f)
-        {
-            anim.SetBool("isDead", true);
-            Debug.Log("Minion Leader is dead");
-            SetTransition(MLTransition.NoHP);
-            elapsedTime = 0f;
-            if (elapsedTime >= 3f)
-            {
-                Destroy(gameObject);
-            }
-        }
-    }*/
-    
+    } 
 }
 
