@@ -23,6 +23,11 @@ public class ControlPlayer : MonoBehaviour
 
     float movementSpeed;
 
+
+    public AudioClip Fire;
+
+    public AudioSource AudioSource1;
+
     public float hp;
 
     float fireRate;
@@ -40,6 +45,7 @@ public class ControlPlayer : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         speed = 5f;
         movementSpeed = 5f;
+        AudioSource1.clip = Fire;
     }
 
     // Update is called once per frame
@@ -91,6 +97,7 @@ public class ControlPlayer : MonoBehaviour
 
         if(Input.GetMouseButtonDown(0))
         {
+            AudioSource1.Play();
             Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
         }
 

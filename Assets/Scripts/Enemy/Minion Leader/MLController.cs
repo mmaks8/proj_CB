@@ -13,6 +13,10 @@ public class MLController : MLFSM
 
     public GameObject projectile;
 
+    public AudioClip AlienFire;
+
+    public AudioSource AudioSource1;
+
     public float damage;
 
     float elapsedTime;
@@ -26,6 +30,8 @@ public class MLController : MLFSM
         damage = 5f;
         elapsedTime = 0.0f;
         shootRate = 3f;
+
+        AudioSource1.clip = AlienFire;
 
         anim = GetComponent<Animator>();
         anim.speed = 0.4f;
@@ -99,10 +105,11 @@ public class MLController : MLFSM
         if (elapsedTime >= shootRate)
         {
             anim.SetBool("isAttacking", true);
+            AudioSource1.Play();
             Instantiate(projectile, spawnPoint.position, Quaternion.identity);
 
             elapsedTime = 0.0f;
-            
+
         }
     }
 
@@ -126,6 +133,7 @@ public class MLController : MLFSM
                 }
             }
         }
-    } 
+
+    }
 }
 
