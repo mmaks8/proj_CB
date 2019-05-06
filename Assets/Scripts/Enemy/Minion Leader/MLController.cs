@@ -13,12 +13,8 @@ public class MLController : MLFSM
 
     public GameObject projectile;
 
-    public AudioClip AlienFire;
-
-    public AudioSource AudioSource1;
-
     public float damage;
-
+    
     float elapsedTime;
     float shootRate;
 
@@ -30,8 +26,6 @@ public class MLController : MLFSM
         damage = 5f;
         elapsedTime = 0.0f;
         shootRate = 3f;
-
-        AudioSource1.clip = AlienFire;
 
         anim = GetComponent<Animator>();
         anim.speed = 0.4f;
@@ -101,24 +95,20 @@ public class MLController : MLFSM
 
     public void ShootProjectile()
     {
-        anim.SetBool("isAttacking", false);
-        if (elapsedTime >= shootRate)
+        if(elapsedTime >= shootRate)
         {
             anim.SetBool("isAttacking", true);
-            AudioSource1.Play();
             Instantiate(projectile, spawnPoint.position, Quaternion.identity);
 
             elapsedTime = 0.0f;
-
         }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-
+        
         if (collision.gameObject.tag == "Bullet")
         {
-            anim.SetBool("isHit", true);
             hp -= 25;
 
             if (hp <= 0)
@@ -127,13 +117,11 @@ public class MLController : MLFSM
                 Debug.Log("Minion Leader is dead");
                 SetTransition(MLTransition.NoHP);
                 elapsedTime = 0f;
-                if (elapsedTime >= 3f)
+                if(elapsedTime >= 3f)
                 {
                     Destroy(gameObject);
                 }
             }
         }
-
     }
 }
-

@@ -21,8 +21,6 @@ public class Player_Controller : MonoBehaviour
     float fireRate;
     float elapsedTime;
 
-    private Camera mainCamera;
-
     void Start()
     {
         elapsedTime = 0f;
@@ -37,63 +35,41 @@ public class Player_Controller : MonoBehaviour
     void Update()
     {
         anim.SetFloat("WalkSpeed", 0f);
+        if (controller.isGrounded)
+        {
 
-            if (Input.GetKeyDown(KeyCode.W))
+            if (Input.GetKey(KeyCode.W))
             {
                 anim.SetFloat("WalkSpeed", 0.5f);
                 direction = new Vector3(0, 0, 1);
                 direction *= movementSpeed;
                 direction = transform.TransformDirection(direction);
             }
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                anim.SetFloat("WalkSpeed", 0.5f);
-                direction = new Vector3(1, 0, 0);
-                direction *= movementSpeed;
-                direction = transform.TransformDirection(direction);
-            }
-            if (Input.GetKeyDown(KeyCode.S))
+            if (Input.GetKey(KeyCode.S))
             {
                 anim.SetFloat("WalkSpeed", 0.5f);
                 direction = new Vector3(0, 0, -1);
                 direction *= movementSpeed;
                 direction = transform.TransformDirection(direction);
             }
-            if (Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S))
             {
                 anim.SetFloat("WalkSpeed", 0.5f);
-                direction = new Vector3(-1, 0, 0);
-                direction *= movementSpeed;
-                direction = transform.TransformDirection(direction);
-            }
-            if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D))
-            {
-                anim.SetFloat("WalkSpeed", 0f);
                 direction = new Vector3(0, 0, 0);
             }
+            if (Input.GetKey(KeyCode.Space) && Time.time >= elapsedTime)
+            {
+                elapsedTime = Time.time + 1f / fireRate;
+                Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
+            }
+        }
+
+
+        rot += Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime;
+        transform.eulerAngles = new Vector3(0, rot, 0);
 
         direction.y -= gravity * Time.deltaTime;
         controller.Move(direction * Time.deltaTime);
-
-        Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
-        Plane ground = new Plane(Vector3.up, Vector3.zero);
-
-        float rayLength;
-
-        if (ground.Raycast(cameraRay, out rayLength))
-        {
-            Vector3 pointToLook = cameraRay.GetPoint(rayLength);
-            Debug.DrawLine(cameraRay.origin, pointToLook, Color.red);
-
-
-            transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
-
-        }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
-        }
     }
 }
 

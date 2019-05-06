@@ -9,15 +9,11 @@ public class CameraFollow : MonoBehaviour
 
     Vector3 offset;                     // The initial offset from the target.
 
-    private SetTransparency setTrans;
-
     void Start()
     {
-        StartCoroutine(DetectPlayerObstructions());
         // Calculate the initial offset.
         offset = transform.position - target.position;
     }
-
 
     void FixedUpdate()
     {
@@ -26,47 +22,5 @@ public class CameraFollow : MonoBehaviour
 
         // Smoothly interpolate between the camera's current position and it's target position.
         transform.position = Vector3.Lerp(transform.position, targetCamPos, smoothing * Time.deltaTime);
-    }
-
-    IEnumerator DetectPlayerObstructions()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(0.5f);
-
-            Vector3 direction = (target.position - Camera.main.transform.position).normalized;
-            RaycastHit rayCastHit;
-
-            if (Physics.Raycast(Camera.main.transform.position, direction, out rayCastHit, Mathf.Infinity))
-            {
-                SetTransparency objT = rayCastHit.collider.gameObject.GetComponent<SetTransparency>();
-                
-                if (objT)
-                {
-                    objT.SetTransparent();
-                    setTrans = objT;
-                }
-                else
-                {
-                    if (setTrans)
-                    {
-                        setTrans.SetToNormal();
-                        setTrans = null;
-                    }
-                }
-            }
-
-        }
-    }
-
-    public void StartRayCast()
-    {
-        StopCoroutine("DetectPlayerObstructions");
-        StartCoroutine(DetectPlayerObstructions());
-    }
-
-    public void StopRayCast()
-    {
-        StopCoroutine("DetectPlayerObstructions");
     }
 }

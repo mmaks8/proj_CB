@@ -11,19 +11,18 @@ public class MinionController : FSMTwo
     private NavMeshAgent nav;
 
     public float damage;
-    public AudioSource AudioSource2;
-    public AudioClip AlienSlap;
 
     float hp;
 
     float elapsedTime;
+    //public Au Shootsound;
+    //private AudioSource Source;
 
     protected override void Initialize()
     {
         hp = 100f;
         elapsedTime = 0f;
         damage = 1f;
-        AudioSource2.clip = AlienSlap;
 
         anim = GetComponent<Animator>();
         anim.speed = 0.4f;
@@ -97,7 +96,6 @@ public class MinionController : FSMTwo
 
         if (collision.gameObject.tag == "Bullet")
         {
-            anim.SetTrigger("isHit");
             hp -= 50;
 
             if (hp <= 0)
@@ -112,7 +110,5 @@ public class MinionController : FSMTwo
                 }
             }
         }
-        else
-            AudioSource2.Play();
     }
 }

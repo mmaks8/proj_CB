@@ -30,6 +30,7 @@ public class AttackState : FSMStates
 
     public override void Act(Transform player, Transform npc, Animator anim, NavMeshAgent nav, float dmg)
     {
+        
         anim.SetBool("isAttacking", true);
 
         Quaternion targetRotation = Quaternion.LookRotation(player.position - npc.position);
