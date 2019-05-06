@@ -3,6 +3,20 @@ public static class CONSTANTS
     public static class GLOBAL
     {
         public const float  TIME_BEFORE_DESTROY = 5.0f;
+
+        public static class SCENES
+        {
+            public const string MENU = "MENU";
+            public const string PRACTICE_STORY = "PRACTICE_STORY";
+            public const string DRY_PLANET_INTRO = "DRY_PLANET_INTRO";
+            public const string DRY_PLANET = "DRY_PLANET";
+            public const string GREEN_PLANET_INTRO = "GREEN_PLANET_INTRO";
+            public const string GREEN_PLANET = "GREEN_PLANET";
+            public const string LUSH_PLANET_INTRO = "LUSH_PLANET_INTRO";
+            public const string LUSH_PLANET = "LUSH_PLANET";
+            public const string ICE_PLANET_INTRO = "ICE_PLANET_INTRO";
+            public const string ICE_PLANET = "ICE_PLANET";
+        }
     }
     public static class ENEMY
     {

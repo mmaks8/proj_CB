@@ -1,4 +1,8 @@
+using System;
+using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 /// <summary>
 /// Sound Manager, should be used only by the GM.
@@ -22,6 +26,7 @@ class SoundManager : MonoBehaviour
             //Destroy this, this enforces our singleton pattern so there can only be one instance of SoundManager.
             Destroy (gameObject);
         
+        Debug.Log(Instance);
         //Set SoundManager to DontDestroyOnLoad so that it won't be destroyed when reloading our scene.
         DontDestroyOnLoad (gameObject);
     }
@@ -74,9 +79,12 @@ class SoundManager : MonoBehaviour
 public enum GameState
 {
     MAIN_MENU,
-    INTRO,
+    PRACTICE_STORY,
+    INTRO_LEVEL_ONE,
     LEVEL_ONE,
+    INTRO_LEVEL_TWO,
     LEVEL_TWO,
+    INTRO_LEVEL_THREE,
     LEVEL_THREE
 }
 
@@ -94,27 +102,50 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
     // Game Stats
     private int Score { get; set; }
+    private static Dictionary<GameState, string> scenes = new Dictionary<GameState, string>();
  
     // Call this to get the instance
     public static GameManager Instance {
         get {
             if (instance == null)
             {
-                DontDestroyOnLoad(instance);
-                instance = new GameManager();
+                GameObject go = new GameObject("_gamemanager");
+                DontDestroyOnLoad(go);
+                instance = go.AddComponent<GameManager>();
+                instance.gameState = GameState.MAIN_MENU;
+
+                scenes.Add(GameState.MAIN_MENU, CONSTANTS.GLOBAL.SCENES.MENU);
+                scenes.Add(GameState.PRACTICE_STORY, CONSTANTS.GLOBAL.SCENES.PRACTICE_STORY);
+                scenes.Add(GameState.INTRO_LEVEL_ONE, CONSTANTS.GLOBAL.SCENES.DRY_PLANET_INTRO);
+                scenes.Add(GameState.LEVEL_ONE, CONSTANTS.GLOBAL.SCENES.DRY_PLANET);
+                // scenes.Add(GameState.INTRO_LEVEL_TWO, CONSTANTS.GLOBAL.SCENES.LUSH_PLANET_INTRO);
+                // scenes.Add(GameState.LEVEL_TWO, CONSTANTS.GLOBAL.SCENES.LUSH_PLANET);
+                // scenes.Add(GameState.INTRO_LEVEL_THREE, CONSTANTS.GLOBAL.SCENES.ICE_PLANET_INTRO);
+                // scenes.Add(GameState.LEVEL_THREE, CONSTANTS.GLOBAL.SCENES.ICE_PLANET);
             }
 
             return instance;
         }
     }
     
-    public void SetGameState(GameState state){
+    public void SetGameState(GameState state) {
         this.gameState = state;
-        OnStateChange();
+
+        OnStateChange?.Invoke();
+
+        if (scenes.ContainsKey(this.gameState))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(scenes[this.gameState]);
+        }
+        else
+        {
+            throw new Exception("[-] Invalid game state");
+        }
     }
 
     // Add your game manager members here
     public void Pause(bool paused) {
+        // TODO
     }
 
     /// <summary>
