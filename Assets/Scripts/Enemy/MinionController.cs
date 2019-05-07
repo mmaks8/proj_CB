@@ -105,6 +105,8 @@ public class MinionController : FSMTwo
                 anim.SetBool("isDead", true);
                 Debug.Log("Minion  is dead");
                 SetTransition(Transition.NoHP);
+
+                Destroy(gameObject, CONSTANTS.GLOBAL.TIME_BEFORE_DESTROY);
                 elapsedTime = 0f;
                 if (elapsedTime >= 3f)
                 {
