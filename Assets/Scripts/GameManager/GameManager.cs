@@ -65,6 +65,7 @@ class SoundManager : MonoBehaviour
     // Stop all audio sounds playing currently
     public void StopAllAudio()
     {
+        System.Diagnostics.Debugger.Launch();
         AudioSource[] allAudioSources = FindObjectsOfType(typeof(AudioSource)) as AudioSource[];
         foreach (AudioSource  audioSource in allAudioSources)
         {
@@ -168,9 +169,9 @@ public class GameManager : MonoBehaviour
     {
         SoundManager.Instance.RandomizeSfx(clips);
     }
-    
+
     public void StopAllAudio()
     {
-        SoundManager.Instance.StopAllAudio();
+        //SoundManager.Instance.StopAllAudio();
     }
 }

@@ -12,10 +12,12 @@ public class DIalogue : MonoBehaviour
     public float speed;
     public GameObject ContinueButton;
 
+    public AudioClip IntroMusic;
 
      void Start()
     {
         StartCoroutine(Type());
+        GameManager.Instance.PlaySingle(IntroMusic);
     }
 
     void Update()
