@@ -14,7 +14,14 @@ public class Bullet : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         speed = 20f;
-        Destroy(gameObject, 2f);
+        if (gameObject.transform.parent != null && gameObject.transform.parent.gameObject.name == "Bonus Bullet(Clone)")
+        {
+            Destroy(gameObject.transform.parent.gameObject, 2f);            
+        }
+        else
+        {
+            Destroy(gameObject, 2f);
+        }
     }
 
     // Update is called once per frame

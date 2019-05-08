@@ -1,86 +1,43 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class ControlPlayer : MonoBehaviour
 {
-    public float speed;
-    private Rigidbody rb;
+    public float         speed;
+    public GameObject    bullet;
+    public GameObject    bulletBonus;
+    public Transform     spawnPoint;
+    public Text          hpText;
+    public Text          bonusCountText;
+    public Slider        hpSlider;
+    public GameObject    normalBulletUi;
+    public GameObject    bonusBulletUi;
+    public AudioClip     Fire;
+    public AudioSource   AudioSource1;
 
-    private Vector3 inMove;
-    private Vector3 moveVelocity;
-
-    private Camera mainCamera;
-
-    private Animator anim;
-
-    float elapsedTime;
-
-    public GameObject bullet;
-    public Transform spawnPoint;
-
-    float range = 100f;
-
-    float movementSpeed;
-
-
-    public AudioClip Fire;
-
-    public AudioSource AudioSource1;
-
-    public float hp;
-
-    float fireRate;
-
+    
+    private int          _hp = 100;
+    private float        _runSpeed = 0.5f;
+    private int          _bonusCount;
+    private Camera       _mainCamera;
+    private Animator     _anim;
 
     // Start is called before the first frame update
     void Start()
     {
-        hp = 100f;
-        Debug.Log("Player hp: " + hp);
-        fireRate = 20f;
-        elapsedTime = 0f;
-        anim = GetComponent<Animator>();
-        mainCamera = FindObjectOfType<Camera>();
-        rb = GetComponent<Rigidbody>();
+        _anim = GetComponent<Animator>();
+        _mainCamera = FindObjectOfType<Camera>();
         speed = 5f;
-        movementSpeed = 5f;
         AudioSource1.clip = Fire;
     }
 
     // Update is called once per frame
     void Update()
     {
-        anim.SetBool("GunAim", true);
-        /*if (Input.GetKey(KeyCode.Space) && Time.time >= elapsedTime)
-        {
-            elapsedTime = Time.time + 1f / fireRate;
-            //Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
-        }*/
-        if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))
-        {
-            anim.SetFloat("WalkSpeed", 0.5f);
-            inMove = new Vector3(0f, 0f, Input.GetAxisRaw("Vertical"));
-            moveVelocity = inMove * speed;
-        }
-        if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
-        {
-            anim.SetFloat("WalkSpeed", 0.5f);
-            inMove = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
-            moveVelocity = inMove * speed;
-        }
-        if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
-        {
-            anim.SetFloat("WalkSpeed", 0f);
-            moveVelocity = Vector3.zero;
-        }
-        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S))
-        {
-            anim.SetFloat("WalkSpeed", 0f);
-            moveVelocity = Vector3.zero;
-        }
+        _anim.SetBool("GunAim", true);
+        _anim.SetFloat("WalkSpeed", 0);
 
-        Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
+        Ray cameraRay = _mainCamera.ScreenPointToRay(Input.mousePosition);
         Plane ground = new Plane(Vector3.up, Vector3.zero);
 
         float rayLength;
@@ -90,47 +47,109 @@ public class ControlPlayer : MonoBehaviour
             Vector3 pointToLook = cameraRay.GetPoint(rayLength);
             Debug.DrawLine(cameraRay.origin, pointToLook, Color.red);
 
-            
-             transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
-            
+            transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
+    
+            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.W)) {
+                 _anim.SetFloat("WalkSpeed", _runSpeed);
+                 transform.position = Vector3.MoveTowards(transform.position, pointToLook, speed * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)) {
+                _anim.SetFloat("WalkSpeed", _runSpeed);
+                transform.position = Vector3.MoveTowards(transform.position, pointToLook, -speed * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.A)) {
+                _anim.SetFloat("WalkSpeed", _runSpeed);
+                transform.Translate(Vector3.left * Time.deltaTime * speed, Space.Self);
+            }
+            if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+            {
+                _anim.SetFloat("WalkSpeed", _runSpeed);
+                transform.Translate(Vector3.right * Time.deltaTime * speed, Space.Self);
+            }
+        }
+        
+        if (Input.GetKey(KeyCode.Space))
+        {
+            _anim.SetTrigger("Jumping");
+            transform.Translate(Vector3.up * 20 * Time.deltaTime, Space.World);
+            _anim.SetTrigger("Landing");
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            _runSpeed = 1.0f;
+            speed = 10.0f;
+        }
+        else
+        {
+            _runSpeed = 0.5f;
+            speed = 5.0f;
         }
 
         if(Input.GetMouseButtonDown(0))
         {
-            AudioSource1.Play();
-            Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
+            if (_bonusCount > 0)
+            {
+                AudioSource1.Play();
+                AudioSource1.Play();
+                AudioSource1.Play();
+                Instantiate(bulletBonus, spawnPoint.position, spawnPoint.rotation);
+                _bonusCount--;
+                bonusCountText.text = _bonusCount.ToString();
+            }
+            else
+            {
+                AudioSource1.Play();
+                Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);                
+            }
+        }
+
+        if (_bonusCount == 0)
+        {
+            bonusBulletUi.SetActive(false);
+            normalBulletUi.SetActive(true);
         }
 
     }
-
-
-    void FixedUpdate()
-    {
-        rb.velocity = moveVelocity;
-    }
-
     void OnCollisionEnter(Collision collision)
     {
 
-        if (collision.gameObject.tag == "Projectile")
+        if (collision.gameObject.CompareTag("health"))
         {
-            hp -= 25;
-            Debug.Log("Player hp: " + hp);
-            if (hp <= 0)
+            ChangeHp(100);
+            Destroy(collision.transform.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("bullet"))
+        {
+            bonusBulletUi.SetActive(true);
+            normalBulletUi.SetActive(false);
+            _bonusCount = 10;
+            Destroy(collision.transform.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("Projectile"))
+        {
+            ChangeHp(_hp -25);
+            if (_hp <= 0)
             {
                 Debug.Log("Player is dead.");
             }
         }
-        if(collision.gameObject.tag == "MinionSlap")
+        if(collision.gameObject.CompareTag("MinionSlap"))
         {
-            hp -= 10;
-            Debug.Log("Player hp: " + hp);
-            if (hp <= 0)
+            ChangeHp(_hp - 10);
+            if (_hp <= 0)
             {
                 Debug.Log("Player is dead.");
             }
         }
-
-
+    }
+    private void ChangeHp(int hp)
+    {
+        _hp = hp;
+        hpSlider.value = _hp;
+        hpText.text = _hp + " HP";
     }
 }
+
