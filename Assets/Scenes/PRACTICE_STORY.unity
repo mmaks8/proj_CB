@@ -882,11 +882,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textDisplay: {fileID: 1292922313}
   sentences:
-  - Never in a million years  would have thought you'd be halfway across the galaxy
+  - Never in a million years would you have thought you'd be hurtling across the galaxy
     looking for revenge.
-  - '      Evil Aliens abuducted your family and it was you job to get them back.'
-  - '       They didnt care'
-  - '       Now it was your turn to find them and get revenge. '
+  - Those aliens took everything you ever cared for.
+  - Your wife.
+  - Your children.
+  - You can't help but feel so many emotions.
+  - Regret at leaving your family alone to work on your spaceship.
+  - Hope that they are somehow, somewhere still alive.
+  - Even guilt at where your priorities had been.
+  - But there was no doubt about that now.
+  - You still feel one more emotion burning in your chest.
+  - Rage.
+  - You were going to get your family back.
+  - And you were going to make their captors suffer.
   speed: 0.02
   ContinueButton: {fileID: 1427762181}
 --- !u!4 &1969610216
