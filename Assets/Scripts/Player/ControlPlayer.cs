@@ -19,6 +19,8 @@ public class ControlPlayer : MonoBehaviour
     public AudioSource   AudioDamage;
     public AudioClip     Dead;
     public AudioSource   AudioDead;
+    public AudioClip     Powerup;
+    public AudioSource   AudioPowerup;
 
     private int          _hp = 100;
     private float        _runSpeed = 0.5f;
@@ -35,6 +37,7 @@ public class ControlPlayer : MonoBehaviour
         AudioSource1.clip = Fire;
         AudioDamage.clip = Damage;
         AudioDead.clip = Dead;
+        AudioPowerup.clip = Powerup;
     }
 
     // Update is called once per frame
@@ -122,12 +125,14 @@ public class ControlPlayer : MonoBehaviour
 
         if (collision.gameObject.CompareTag("health"))
         {
+            AudioPowerup.Play();
             ChangeHp(100);
             Destroy(collision.transform.gameObject);
         }
 
         if (collision.gameObject.CompareTag("bullet"))
         {
+            AudioPowerup.Play();
             bonusBulletUi.SetActive(true);
             normalBulletUi.SetActive(false);
             _bonusCount = 10;
