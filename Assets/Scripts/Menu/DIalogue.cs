@@ -57,8 +57,14 @@ public class DIalogue : MonoBehaviour
         {
             textDisplay.text = "";
             ContinueButton.SetActive(false);
-            UnityEngine.SceneManagement.SceneManager.LoadScene(CONSTANTS.GLOBAL.SCENES.DRY_PLANET);
-
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == CONSTANTS.GLOBAL.SCENES.ENDING)
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene(CONSTANTS.GLOBAL.SCENES.MENU);
+            }
+            else
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene(CONSTANTS.GLOBAL.SCENES.DRY_PLANET);   
+            }
         }
      }
    

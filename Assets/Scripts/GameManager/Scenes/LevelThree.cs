@@ -29,7 +29,7 @@ public class LevelThree : Scene
         }
         if (boss.Length == 0 && enemies.Length == 0 && elapsedTime >= 5f)
         {
-                GameManager.Instance.SetGameState(GameState.MAIN_MENU);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(CONSTANTS.GLOBAL.SCENES.ENDING);
         }
         enemiesCount = GameObject.Find("EnemiesCount").GetComponent<Text>();
         Debug.Log(enemiesCount.text);

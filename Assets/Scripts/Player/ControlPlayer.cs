@@ -131,14 +131,29 @@ public class ControlPlayer : MonoBehaviour
             Destroy(collision.transform.gameObject);
         }
 
+        if (collision.gameObject.CompareTag("Boss"))
+        {
+            ChangeHp(_hp - 25);
+            if (_hp <= 0)
+            {
+                AudioDead.Play();
+
+                Debug.Log("Player is dead.");
+                UnityEngine.SceneManagement.SceneManager.LoadScene(CONSTANTS.GLOBAL.SCENES.GAME_OVER);
+            }
+            else
+                AudioDamage.Play();
+        }
+        
         if (collision.gameObject.CompareTag("bullet"))
         {
             AudioPowerup.Play();
             bonusBulletUi.SetActive(true);
             normalBulletUi.SetActive(false);
-            _bonusCount = 10;
+            _bonusCount = 30;
             Destroy(collision.transform.gameObject);
         }
+
 
         if (collision.gameObject.CompareTag("Projectile"))
         {
@@ -166,7 +181,6 @@ public class ControlPlayer : MonoBehaviour
             }
             else
                 AudioDamage.Play();
-
         }
     }
     private void ChangeHp(int hp)

@@ -17,6 +17,7 @@ public static class CONSTANTS
             public const string ICE_PLANET_INTRO = "ICE_PLANET_INTRO";
             public const string ICE_PLANET = "ICE_PLANET";
             public const string GAME_OVER = "GAME_OVER";
+            public const string ENDING = "ENDING";
         }
     }
     public static class ENEMY
@@ -24,7 +25,7 @@ public static class CONSTANTS
         public static class BOSS
         {
             // Stats
-            public const float  HP = 5000.0f;
+            public const float  HP = 500.0f;
             public const float  DAMAGES = 20.0f;
             public const float  SPEED = 0.0f;
             public const float  FIRE_RATE = 1.0f;
