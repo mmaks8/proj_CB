@@ -9,6 +9,8 @@ public class Bullet : MonoBehaviour
     Rigidbody rb;
     public GameObject impactEffect;
 
+    public float testvar;
+
     // Start is called before the first frame update
     void Start()
     {

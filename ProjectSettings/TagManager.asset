@@ -11,6 +11,9 @@ TagManager:
   - Projectile
   - MinionSlap
   - terrain
+  - bullet
+  - health
+  - BossPoint
   layers:
   - Default
   - TransparentFX

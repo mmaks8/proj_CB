@@ -8,8 +8,9 @@ using UnityEngine.SceneManagement;
 public class Timer : MonoBehaviour
 {
     public Text timertext;
-    public static float startTime = 75.0f;
-   //public float startTime = 120.0f;
+    public float startTime;
+    public float t;
+    //public float startTime = 120.0f;
     // private bool finnish = false;
 
 
@@ -17,17 +18,24 @@ public class Timer : MonoBehaviour
     //
     // {
     //   startTime = 120.0f;
-  // }
+    // }
 
     //Update is called once per frame
     //public void star()
 
     //{
-    private void Update()
+
+        public void Start()
+        {
+            startTime = 75.0f;
+        }
+
+
+    public void Update()
    
         {
 
-            float t = startTime - Time.time;
+            t = startTime - Time.time;
 
             if (t < 0.0)
             {
@@ -46,8 +54,7 @@ public class Timer : MonoBehaviour
             string seconds = (t % 60).ToString("f1");
 
             timertext.text = minutes + ":" + seconds;
-
-
+            
 
         
 

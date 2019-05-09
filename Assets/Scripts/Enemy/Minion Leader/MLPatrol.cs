@@ -32,6 +32,12 @@ public class MLPatrol: MLStatesID
 
         //finds another waypoint if one is already reached
 
+        if(destPos == Vector3.zero)
+        {
+            Debug.Log("Reached destination. Moving to next destination.");
+            FindNextPoint();
+        }
+
         if (Vector3.Distance(npc.position, destPos) <= 2.0f)
         {
             Debug.Log("Reached destination. Moving to next destination.");

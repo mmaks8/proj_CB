@@ -64,7 +64,7 @@ public class BossController : BossFSM
 
     private void ConstructFSM()
     {
-        pointList = GameObject.FindGameObjectsWithTag("GuardPoint");
+        pointList = GameObject.FindGameObjectsWithTag("BossPoint");
 
         Transform[] wayPoints = new Transform[pointList.Length];
 

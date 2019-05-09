@@ -5,7 +5,9 @@ using UnityEngine.AI;
 
 public class MinionController : FSMTwo
 {
-
+    public Timer newTime;
+    public GameObject timerObj;
+ 
     private Animator anim;
 
     private NavMeshAgent nav;
@@ -20,6 +22,8 @@ public class MinionController : FSMTwo
 
     protected override void Initialize()
     {
+        newTime = timerObj.GetComponent<Timer>();
+
         hp = 100f;
         elapsedTime = 0f;
         damage = 1f;
@@ -102,15 +106,21 @@ public class MinionController : FSMTwo
 
             if (hp <= 0)
             {
+                newTime.t += 10.0f;  // Add more time if minion dies
+
                 anim.SetBool("isDead", true);
                 Debug.Log("Minion  is dead");
                 SetTransition(Transition.NoHP);
 
                 Destroy(gameObject, CONSTANTS.GLOBAL.TIME_BEFORE_DESTROY);
+
+                
                 elapsedTime = 0f;
                 if (elapsedTime >= 3f)
                 {
+
                     Destroy(gameObject);
+                    
                 }
             }
         }

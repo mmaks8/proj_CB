@@ -126,6 +126,8 @@ public class MLController : MLFSM
                 anim.SetBool("isDead", true);
                 Debug.Log("Minion Leader is dead");
                 SetTransition(MLTransition.NoHP);
+
+                Destroy(gameObject, CONSTANTS.GLOBAL.TIME_BEFORE_DESTROY);
                 elapsedTime = 0f;
                 if (elapsedTime >= 3f)
                 {
