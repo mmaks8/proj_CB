@@ -16,6 +16,9 @@ public class MinionController : FSMTwo
     public AudioSource AudioSource2;
     public AudioClip AlienSlap;
 
+
+    public AudioSource AudioDead;
+    public AudioClip Dead;
     float hp;
 
     float elapsedTime;
@@ -28,6 +31,7 @@ public class MinionController : FSMTwo
         elapsedTime = 0f;
         damage = 1f;
         AudioSource2.clip = AlienSlap;
+        AudioDead.clip = Dead;
 
         anim = GetComponent<Animator>();
         anim.speed = 0.4f;
@@ -106,6 +110,7 @@ public class MinionController : FSMTwo
 
             if (hp <= 0)
             {
+                AudioDead.Play();
                 newTime.t += 10.0f;  // Add more time if minion dies
 
                 anim.SetBool("isDead", true);

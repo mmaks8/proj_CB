@@ -924,3 +924,6 @@ C:\Users\J'nom\Documents\GitHub2\proj_CB\obj\Debug\Assembly-CSharp.csproj.CoreCo
 C:\Users\J'nom\Documents\GitHub2\proj_CB\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Users\J'nom\Documents\GitHub2\proj_CB\obj\Debug\Assembly-CSharp.dll
 C:\Users\J'nom\Documents\GitHub2\proj_CB\obj\Debug\Assembly-CSharp.pdb
+C:\Users\J'nom\Documents\GitHub2\proj_CB\Temp\bin\Debug\Boo.Lang.dll
+C:\Users\J'nom\Documents\GitHub2\proj_CB\Temp\bin\Debug\UnityEditor.UI.dll
+C:\Users\J'nom\Documents\GitHub2\proj_CB\Temp\bin\Debug\UnityEditor.UI.xml
