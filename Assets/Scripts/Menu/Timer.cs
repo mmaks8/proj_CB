@@ -35,7 +35,7 @@ public class Timer : MonoBehaviour
    
         {
 
-            t = startTime - Time.time;
+            t = startTime - Time.timeSinceLevelLoad;
 
             if (t < 0.0)
             {

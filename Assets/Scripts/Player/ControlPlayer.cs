@@ -32,7 +32,8 @@ public class ControlPlayer : MonoBehaviour
     void Start()
     {
         _anim = GetComponent<Animator>();
-        _mainCamera = FindObjectOfType<Camera>();
+        _mainCamera = Camera.main;
+        // _mainCamera = FindObjectOfType<Camera>();
         speed = 5f;
         AudioSource1.clip = Fire;
         AudioDamage.clip = Damage;
