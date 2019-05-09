@@ -32,7 +32,6 @@ public class Projectile : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            Debug.Log("---------------- HIT BITCH");
             Instantiate(impactEffect, transform.position, transform.rotation);
             Destroy(gameObject);
         }

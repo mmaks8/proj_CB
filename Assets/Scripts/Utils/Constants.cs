@@ -25,7 +25,7 @@ public static class CONSTANTS
         public static class BOSS
         {
             // Stats
-            public const float  HP = 500.0f;
+            public const float  HP = 2000.0f;
             public const float  DAMAGES = 20.0f;
             public const float  SPEED = 0.0f;
             public const float  FIRE_RATE = 1.0f;

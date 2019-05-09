@@ -118,7 +118,6 @@ public class BossController : BossFSM
                         anim.SetBool(animation.name, false);
                     }
 
-                    Debug.Log("GONNA DIE");
                     anim.SetBool(CONSTANTS.ENEMY.BOSS.ANIM_DIE, true);
                     SetTransition(BossTransition.NoHP);
                     Destroy(gameObject, CONSTANTS.GLOBAL.TIME_BEFORE_DESTROY); // Destroy the body after 'TINE_BEFORE_DESTROY' sec
