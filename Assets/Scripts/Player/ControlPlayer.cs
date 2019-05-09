@@ -15,7 +15,11 @@ public class ControlPlayer : MonoBehaviour
     public AudioClip     Fire;
     public AudioSource   AudioSource1;
 
-    
+    public AudioClip     Damage;
+    public AudioSource   AudioDamage;
+    public AudioClip     Dead;
+    public AudioSource   AudioDead;
+
     private int          _hp = 100;
     private float        _runSpeed = 0.5f;
     private int          _bonusCount;
@@ -29,6 +33,8 @@ public class ControlPlayer : MonoBehaviour
         _mainCamera = FindObjectOfType<Camera>();
         speed = 5f;
         AudioSource1.clip = Fire;
+        AudioDamage.clip = Damage;
+        AudioDead.clip = Dead;
     }
 
     // Update is called once per frame
@@ -133,16 +139,26 @@ public class ControlPlayer : MonoBehaviour
             ChangeHp(_hp -25);
             if (_hp <= 0)
             {
+                AudioDead.Play();
+
                 Debug.Log("Player is dead.");
             }
+            else
+                AudioDamage.Play();
+
         }
-        if(collision.gameObject.CompareTag("MinionSlap"))
+        if (collision.gameObject.CompareTag("MinionSlap"))
         {
             ChangeHp(_hp - 10);
             if (_hp <= 0)
             {
+                AudioDead.Play();
+
                 Debug.Log("Player is dead.");
             }
+            else
+                AudioDamage.Play();
+
         }
     }
     private void ChangeHp(int hp)
