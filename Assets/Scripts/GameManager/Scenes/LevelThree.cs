@@ -3,14 +3,33 @@ using UnityEngine.UI;
 
 public class LevelThree : Scene
 {
+    public GameObject bossObj;
     private Text enemiesCount;
+    float elapsedTime;
+    bool isBossSpawned;
+
+    private void Start()
+    {
+        elapsedTime = 0.0f;
+        isBossSpawned = false;
+    }
+
     private void Update()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("enemy");
+        elapsedTime += Time.deltaTime;
 
-        if (enemies.Length == 0)
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("enemy");
+        GameObject[] boss = GameObject.FindGameObjectsWithTag("Boss");
+
+        if(enemies.Length == 0 && isBossSpawned == false)
         {
-            GameManager.Instance.SetGameState(GameState.MAIN_MENU);
+            Instantiate(bossObj, transform.position, transform.rotation);
+            elapsedTime = 0.0f;
+            isBossSpawned = true;
+        }
+        if (boss.Length == 0 && enemies.Length == 0 && elapsedTime >= 5f)
+        {
+                GameManager.Instance.SetGameState(GameState.MAIN_MENU);
         }
         enemiesCount = GameObject.Find("EnemiesCount").GetComponent<Text>();
         Debug.Log(enemiesCount.text);

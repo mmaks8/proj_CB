@@ -558,7 +558,7 @@ GameObject:
   m_Layer: 0
   m_Name: spawnPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -569,13 +569,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2519934732695657470}
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0.055, y: 2.367, z: 0.105}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.0022727875, y: -0.21647671, z: -0.0012582042, w: 0.9762844}
+  m_LocalPosition: {x: -0.027, y: 2.367, z: 0.283}
+  m_LocalScale: {x: 1.8091074, y: 1.8091074, z: 1.8091074}
   m_Children: []
   m_Father: {fileID: 769010883461912601}
   m_RootOrder: 22
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.223, y: -25.005001, z: -0.19700001}
 --- !u!1 &2566102559051835855
 GameObject:
   m_ObjectHideFlags: 0
@@ -1501,7 +1501,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.53, y: 2.43, z: 2.04}
+  m_Size: {x: 1.77, y: 1.69, z: 1.29}
   m_Center: {x: 0, y: 1.39, z: 0}
 --- !u!195 &2688400229694751213
 NavMeshAgent:

@@ -20,9 +20,11 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         Vector3 targetPos = new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z);
-        
-        transform.LookAt(targetPos);
-        transform.position += transform.forward * Time.deltaTime * speed;
+
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+
+        //transform.LookAt(targetPos);
+        //transform.position += transform.forward * Time.deltaTime * speed;
 
     }
 

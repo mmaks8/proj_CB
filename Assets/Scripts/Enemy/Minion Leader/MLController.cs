@@ -106,7 +106,7 @@ public class MLController : MLFSM
         {
             anim.SetBool("isAttacking", true);
             AudioSource1.Play();
-            Instantiate(projectile, spawnPoint.position, Quaternion.identity);
+            Instantiate(projectile, spawnPoint.position, spawnPoint.rotation);
 
             elapsedTime = 0.0f;
 
