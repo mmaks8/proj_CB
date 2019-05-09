@@ -17,6 +17,8 @@ public class MLController : MLFSM
 
     public AudioSource AudioSource1;
 
+    public AudioSource AudioDead;
+    public AudioClip Dead;
     public float damage;
 
     float elapsedTime;
@@ -32,7 +34,7 @@ public class MLController : MLFSM
         shootRate = 3f;
 
         AudioSource1.clip = AlienFire;
-
+        AudioDead.clip = Dead;
         anim = GetComponent<Animator>();
         anim.speed = 0.4f;
         nav = GetComponent<NavMeshAgent>();
@@ -123,6 +125,7 @@ public class MLController : MLFSM
 
             if (hp <= 0)
             {
+                AudioDead.Play();
                 anim.SetBool("isDead", true);
                 Debug.Log("Minion Leader is dead");
                 SetTransition(MLTransition.NoHP);
