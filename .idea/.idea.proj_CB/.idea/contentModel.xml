@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
+    <e p="$USER_HOME$/Library/Caches/Rider2018.3/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/Library/Caches/Rider2018.3/resharper-host/local/Transient/ReSharperHost/v183/SolutionCaches/_proj_CB.1030247269.00" t="ExcludeRecursive" />
     <e p="$PROJECT_DIR$" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
@@ -72,11 +74,13 @@
             <e p="GameManager.cs" t="Include" />
             <e p="Scenes" t="Include">
               <e p="LevelOne.cs" t="Include" />
+              <e p="LevelThree.cs" t="Include" />
               <e p="LevelTwo.cs" t="Include" />
               <e p="Scene.cs" t="Include" />
             </e>
           </e>
           <e p="Menu" t="Include">
+            <e p="Chaningback.cs" t="Include" />
             <e p="Controller.cs" t="Include" />
             <e p="DIalogue.cs" t="Include" />
             <e p="LandingDialogue.cs" t="Include" />
@@ -101,6 +105,18 @@
             </e>
           </e>
         </e>
+        <e p="StarNestSkybox" t="Include">
+          <e p="hsv.cginc" t="Include" />
+          <e p="Scripts" t="Include">
+            <e p="CameraScroll.cs" t="Include" />
+            <e p="SkyboxSwitcher.cs" t="Include" />
+          </e>
+          <e p="StarNest.shader" t="Include" />
+          <e p="StarNestSkybox.shader" t="Include" />
+          <e p="StarNestSkybox_HSV.shader" t="Include" />
+          <e p="StarNestSkyboxMask.shader" t="Include" />
+          <e p="StarNestSkyboxReadme.txt" t="Include" />
+        </e>
       </e>
       <e p="Library" t="ExcludeRecursive" />
       <e p="obj" t="ExcludeRecursive" />
@@ -110,7 +126,5 @@
         <e p="bin" t="ExcludeRecursive" />
       </e>
     </e>
-    <e p="$USER_HOME$/Library/Caches/Rider2018.3/extResources" t="IncludeRecursive" />
-    <e p="$USER_HOME$/Library/Caches/Rider2018.3/resharper-host/local/Transient/ReSharperHost/v183/SolutionCaches/_proj_CB.800497577.00" t="ExcludeRecursive" />
   </component>
 </project>

@@ -27,7 +27,7 @@ public class Timer : MonoBehaviour
 
         public void Start()
         {
-            startTime = 75.0f;
+            startTime = 180.0f;
         }
 
 
@@ -42,7 +42,7 @@ public class Timer : MonoBehaviour
 
                 timertext.color = Color.red;
                 startTime += 60.0f;
-                UnityEngine.SceneManagement.SceneManager.LoadScene("TimesUP");
+                UnityEngine.SceneManagement.SceneManager.LoadScene(CONSTANTS.GLOBAL.SCENES.GAME_OVER);
                 // startTime += 5.0f;
                 //t = 5.0f;
                 return;

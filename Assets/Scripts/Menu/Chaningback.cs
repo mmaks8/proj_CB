@@ -5,7 +5,7 @@ using UnityEngine;
 public class Chaningback : MonoBehaviour
 {
     GameManager level;
-    public void Nexxt()
+    public void Next()
     {
         /*if(level.gameState == GameState.LEVEL_ONE)
         {

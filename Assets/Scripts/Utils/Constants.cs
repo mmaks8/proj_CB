@@ -16,6 +16,7 @@ public static class CONSTANTS
             public const string LUSH_PLANET = "LUSH_PLANET";
             public const string ICE_PLANET_INTRO = "ICE_PLANET_INTRO";
             public const string ICE_PLANET = "ICE_PLANET";
+            public const string GAME_OVER = "GAME_OVER";
         }
     }
     public static class ENEMY

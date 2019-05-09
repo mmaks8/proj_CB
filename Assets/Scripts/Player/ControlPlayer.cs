@@ -147,6 +147,7 @@ public class ControlPlayer : MonoBehaviour
                 AudioDead.Play();
 
                 Debug.Log("Player is dead.");
+                UnityEngine.SceneManagement.SceneManager.LoadScene(CONSTANTS.GLOBAL.SCENES.GAME_OVER);
             }
             else
                 AudioDamage.Play();
@@ -160,6 +161,7 @@ public class ControlPlayer : MonoBehaviour
                 AudioDead.Play();
 
                 Debug.Log("Player is dead.");
+                UnityEngine.SceneManagement.SceneManager.LoadScene(CONSTANTS.GLOBAL.SCENES.GAME_OVER);
             }
             else
                 AudioDamage.Play();
