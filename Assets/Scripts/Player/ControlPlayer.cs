@@ -13,9 +13,18 @@ public class ControlPlayer : MonoBehaviour
     public GameObject    normalBulletUi;
     public GameObject    bonusBulletUi;
     public AudioClip     Fire;
-    public AudioSource   AudioSource1;
+    public AudioSource   AudioFire;
 
-    
+    public AudioClip     Powerup;
+    public AudioSource   AudioPowerup;
+
+
+    public AudioClip     Damage;
+    public AudioSource   AudioDamage;
+
+    public AudioClip     Death;
+    public AudioSource   AudioDeath;
+
     private int          _hp = 100;
     private float        _runSpeed = 0.5f;
     private int          _bonusCount;
@@ -28,7 +37,10 @@ public class ControlPlayer : MonoBehaviour
         _anim = GetComponent<Animator>();
         _mainCamera = FindObjectOfType<Camera>();
         speed = 5f;
-        AudioSource1.clip = Fire;
+        AudioFire.clip = Fire;
+        AudioPowerup.clip = Powerup;
+        AudioDamage.clip = Damage;
+        AudioDeath.clip = Death;
     }
 
     // Update is called once per frame
@@ -90,16 +102,19 @@ public class ControlPlayer : MonoBehaviour
         {
             if (_bonusCount > 0)
             {
-                AudioSource1.Play();
-                AudioSource1.Play();
-                AudioSource1.Play();
+                AudioFire.pitch = 2f;
+                AudioFire.Play();
+                AudioFire.Play();
+                AudioFire.Play();
                 Instantiate(bulletBonus, spawnPoint.position, spawnPoint.rotation);
                 _bonusCount--;
                 bonusCountText.text = _bonusCount.ToString();
+                AudioFire.pitch = 1f;
+
             }
             else
             {
-                AudioSource1.Play();
+                AudioFire.Play();
                 Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);                
             }
         }
@@ -116,12 +131,14 @@ public class ControlPlayer : MonoBehaviour
 
         if (collision.gameObject.CompareTag("health"))
         {
+            AudioPowerup.Play();
             ChangeHp(100);
             Destroy(collision.transform.gameObject);
         }
 
         if (collision.gameObject.CompareTag("bullet"))
         {
+            AudioPowerup.Play();
             bonusBulletUi.SetActive(true);
             normalBulletUi.SetActive(false);
             _bonusCount = 10;
@@ -133,7 +150,12 @@ public class ControlPlayer : MonoBehaviour
             ChangeHp(_hp -25);
             if (_hp <= 0)
             {
+                AudioDeath.Play();
                 Debug.Log("Player is dead.");
+            }
+            else
+            {
+                AudioDamage.Play();
             }
         }
         if(collision.gameObject.CompareTag("MinionSlap"))
@@ -141,7 +163,12 @@ public class ControlPlayer : MonoBehaviour
             ChangeHp(_hp - 10);
             if (_hp <= 0)
             {
+                AudioDeath.Play();
                 Debug.Log("Player is dead.");
+            }
+            else
+            {
+                AudioDamage.Play();
             }
         }
     }

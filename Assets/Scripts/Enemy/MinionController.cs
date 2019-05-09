@@ -11,8 +11,10 @@ public class MinionController : FSMTwo
     private NavMeshAgent nav;
 
     public float damage;
-    public AudioSource AudioSource2;
+    public AudioSource AudioSlap;
     public AudioClip AlienSlap;
+    public AudioSource AudioDead;
+    public AudioClip Dead;
 
     float hp;
 
@@ -23,7 +25,8 @@ public class MinionController : FSMTwo
         hp = 100f;
         elapsedTime = 0f;
         damage = 1f;
-        AudioSource2.clip = AlienSlap;
+        AudioSlap.clip = AlienSlap;
+        AudioDead.clip = Dead;
 
         anim = GetComponent<Animator>();
         anim.speed = 0.4f;
@@ -102,6 +105,7 @@ public class MinionController : FSMTwo
 
             if (hp <= 0)
             {
+                AudioDead.Play();
                 anim.SetBool("isDead", true);
                 Debug.Log("Minion  is dead");
                 SetTransition(Transition.NoHP);
@@ -115,6 +119,6 @@ public class MinionController : FSMTwo
             }
         }
         else
-            AudioSource2.Play();
+            AudioSlap.Play();
     }
 }
